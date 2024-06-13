@@ -5,9 +5,9 @@ const ctx = canvas.getContext('2d');
 const spinButton = document.getElementById('spinButton');
 
 const segments = [
-    'Giải thưởng 1', 'Giải thưởng 2', 'Giải thưởng 3', 
-    'Giải thưởng 4', 'Giải thưởng 5', 'Giải thưởng 6',
-    'Giải thưởng 7', 'Giải thưởng 8'
+    '50% + Quà', '55% + Quà', '45% + Quà', 
+    '50% + Quà', 'Mất lượt', '35% + Quà',
+    '40% + Quà', 'Thêm lượt'
 ];
 const segmentColors = [
     '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', 
