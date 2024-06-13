@@ -10,8 +10,8 @@ const segments = [
     '40% + Quà', 'Thêm lượt'
 ];
 const segmentColors = [
-    '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', 
-    '#00B3E6', '#E6B333', '#3366E6', '#B34D4D'
+    '#3ACC85', '#FF0099', '#FF8A00', '#FF5500', 
+    '#CC5555', '#009DEE', '#304BCE', '#93D1BC'
 ];
 
 let startAngle = 0;
@@ -33,6 +33,7 @@ function drawWheel() {
         ctx.fillStyle = 'black';
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
+        ctx.font = 'bold 40px Calibri';
         ctx.fillText(segments[i], -ctx.measureText(segments[i]).width / 2, 0);
         ctx.restore();
     }
