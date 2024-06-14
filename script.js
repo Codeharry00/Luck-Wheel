@@ -33,15 +33,17 @@ function drawWheel() {
         ctx.save();
         ctx.fillStyle = 'black';
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
-        ctx.rotate(angle + arc / 2 + Math.PI / 2);
+        ctx.rotate(angle + arc / 2); // Xoay ngữ cảnh canvas theo góc của mỗi đoạn
         ctx.font = 'bold 18px Calibri'; // Thay đổi kích thước và kiểu chữ
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
-        const text = segments[i].split(' '); // Tách cụm từ thành từng từ
+        const text = segments[i];
 
-        for (let j = 0; j < text.length; j++) {
-            ctx.fillText(text[j], 0, j * 24 - (text.length * 12)); // 24 là khoảng cách giữa các từ, điều chỉnh nếu cần
-        }
+        // Vẽ cụm từ theo chiều ngang xoay 90 độ
+        ctx.save();
+        ctx.rotate(Math.PI / 2); // Xoay ngữ cảnh thêm 90 độ
+        ctx.fillText(text, 0, 0);
+        ctx.restore();
 
         ctx.restore();
     }
