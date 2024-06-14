@@ -14,6 +14,28 @@ const segmentColors = [
     '#CC5555', '#009DEE', '#304BCE', '#93D1BC'
 ];
 
+// **Thêm các hình ảnh cho từng mục phần thưởng**
+const images = [
+    'images/50_qua.png', 'images/55_qua.png', 'images/45_qua.png', 
+    'images/50_qua.png', 'images/mat_luot.png', 'images/35_qua.png',
+    'images/40_qua.png', 'images/them_luot.png'
+];
+
+const loadedImages = [];
+
+let imagesLoaded = 0;
+for (let i = 0; i < images.length; i++) {
+    const img = new Image();
+    img.src = images[i];
+    img.onload = function() {
+        imagesLoaded++;
+        if (imagesLoaded === images.length) {
+            drawWheel(); // Chỉ vẽ bánh xe khi tất cả hình ảnh đã tải xong
+        }
+    };
+    loadedImages.push(img);
+}
+
 let startAngle = 0;
 const arc = Math.PI / (segments.length / 2);
 let spinAngleStart = 0;
@@ -31,19 +53,12 @@ function drawWheel() {
         ctx.fill();
 
         ctx.save();
-        ctx.fillStyle = 'black';
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
-        ctx.rotate(angle + arc / 2); // Xoay ngữ cảnh canvas theo góc của mỗi đoạn
-        ctx.font = 'bold 18px Calibri'; // Thay đổi kích thước và kiểu chữ
-        ctx.textBaseline = 'middle';
-        ctx.textAlign = 'center';
-        const text = segments[i];
+        ctx.rotate(angle + arc / 2 + Math.PI / 2);
 
-        // Vẽ cụm từ theo chiều ngang xoay 90 độ
-        ctx.save();
-        ctx.rotate(Math.PI / 2); // Xoay ngữ cảnh thêm 90 độ
-        ctx.fillText(text, 0, 0);
-        ctx.restore();
+        // **Vẽ hình ảnh**
+        const img = loadedImages[i];
+        ctx.drawImage(img, -50, -50, 100, 100); // Điều chỉnh kích thước hình ảnh nếu cần
 
         ctx.restore();
     }
@@ -83,6 +98,5 @@ function easeOut(t, b, c, d) {
 
 spinButton.addEventListener('click', rotateWheel);
 
-drawWheel();
 
 
