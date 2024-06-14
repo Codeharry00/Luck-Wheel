@@ -6,7 +6,7 @@ const spinButton = document.getElementById('spinButton');
 
 const segments = [
     '50% + Quà', '55% + Quà', '45% + Quà', 
-    'May mắn', 'Mất lượt', '35% + Quà',
+    '50% + Quà', 'Mất lượt', '35% + Quà',
     '40% + Quà', 'Thêm lượt'
 ];
 const segmentColors = [
@@ -34,17 +34,15 @@ function drawWheel() {
         ctx.fillStyle = 'black';
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
-        ctx.font = 'bold 20px Calibri'; // Thay đổi kích thước và kiểu chữ
+        ctx.font = 'bold 18px Calibri'; // Thay đổi kích thước và kiểu chữ
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
-        const words = segments[i].split(' ');
+        const text = segments[i].split(' '); // Tách cụm từ thành từng từ
 
-        // **Bắt đầu phần mã thêm vào**
-        for (let j = 0; j < words.length; j++) {
-            ctx.fillText(words[j], 0, j * 25 - (words.length * 12.5)); // 25 là khoảng cách giữa các từ, điều chỉnh nếu cần
+        for (let j = 0; j < text.length; j++) {
+            ctx.fillText(text[j], 0, j * 24 - (text.length * 12)); // 24 là khoảng cách giữa các từ, điều chỉnh nếu cần
         }
-        // **Kết thúc phần mã thêm vào**
-        
+
         ctx.restore();
     }
 }
