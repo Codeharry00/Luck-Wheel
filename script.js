@@ -34,7 +34,11 @@ function drawWheel() {
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
         ctx.font = 'bold 40px Calibri';
-        ctx.fillText(segments[i], -ctx.measureText(segments[i]).width / 2, 0);
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        const text = segments[i];
+        for (let j = 0; j < text.length; j++) {
+            ctx.fillText(text[j], 0, j * 22 - (text.length * 11));
         ctx.restore();
     }
 }
