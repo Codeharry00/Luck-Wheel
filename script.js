@@ -5,13 +5,13 @@ const ctx = canvas.getContext('2d');
 const spinButton = document.getElementById('spinButton');
 
 const segments = [
-    'Xe đạp', 'iPhone', 'Laptop', 
-    'Tai nghe', 'Máy ảnh', 'Phiếu mua hàng',
-    'Đồng hồ', 'Tivi'
+    '50% + Quà', '55% + Quà', '45% + Quà', 
+    'May mắn', 'Mất lượt', '35% + Quà',
+    '40% + Quà', 'Thêm lượt'
 ];
 const segmentColors = [
-    '#FF0000', '#00FF00', '#0000FF', '#FFFF00', 
-    '#FF00FF', '#00FFFF', '#800080', '#808000'
+    '#3ACC85', '#FF0099', '#FF8A00', '#FF5500', 
+    '#CC5555', '#009DEE', '#304BCE', '#93D1BC'
 ];
 
 let startAngle = 0;
@@ -34,14 +34,16 @@ function drawWheel() {
         ctx.fillStyle = 'black';
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
-        ctx.font = 'bold 20px Arial'; // Thay đổi kích thước và kiểu chữ
+        ctx.font = 'bold 20px Calibri'; // Thay đổi kích thước và kiểu chữ
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
-        const text = segments[i];
-        
-        for (let j = 0; j < text.length; j++) {
-            ctx.fillText(text[j], 0, j * 22 - (text.length * 11)); 
+        const words = segments[i].split(' ');
+
+        // **Bắt đầu phần mã thêm vào**
+        for (let j = 0; j < words.length; j++) {
+            ctx.fillText(words[j], 0, j * 25 - (words.length * 12.5)); // 25 là khoảng cách giữa các từ, điều chỉnh nếu cần
         }
+        // **Kết thúc phần mã thêm vào**
         
         ctx.restore();
     }
@@ -82,4 +84,5 @@ function easeOut(t, b, c, d) {
 spinButton.addEventListener('click', rotateWheel);
 
 drawWheel();
+
 
