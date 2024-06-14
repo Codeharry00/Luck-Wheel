@@ -5,13 +5,13 @@ const ctx = canvas.getContext('2d');
 const spinButton = document.getElementById('spinButton');
 
 const segments = [
-    '50% + Quà', '55% + Quà', '45% + Quà', 
-    '50% + Quà', 'Mất lượt', '35% + Quà',
-    '40% + Quà', 'Thêm lượt'
+    'Xe đạp', 'iPhone', 'Laptop', 
+    'Tai nghe', 'Máy ảnh', 'Phiếu mua hàng',
+    'Đồng hồ', 'Tivi'
 ];
 const segmentColors = [
-    '#3ACC85', '#FF0099', '#FF8A00', '#FF5500', 
-    '#CC5555', '#009DEE', '#304BCE', '#93D1BC'
+    '#FF0000', '#00FF00', '#0000FF', '#FFFF00', 
+    '#FF00FF', '#00FFFF', '#800080', '#808000'
 ];
 
 let startAngle = 0;
@@ -21,6 +21,7 @@ let spinTime = 0;
 let spinTimeTotal = 0;
 
 function drawWheel() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Xóa canvas trước khi vẽ lại
     for (let i = 0; i < segments.length; i++) {
         const angle = startAngle + i * arc;
         ctx.fillStyle = segmentColors[i];
@@ -33,12 +34,15 @@ function drawWheel() {
         ctx.fillStyle = 'black';
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
-        ctx.font = 'bold 40px Calibri';
+        ctx.font = 'bold 20px Arial'; // Thay đổi kích thước và kiểu chữ
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
         const text = segments[i];
+        
         for (let j = 0; j < text.length; j++) {
-            ctx.fillText(text[j], 0, j * 22 - (text.length * 11));
+            ctx.fillText(text[j], 0, j * 22 - (text.length * 11)); 
+        }
+        
         ctx.restore();
     }
 }
@@ -78,3 +82,4 @@ function easeOut(t, b, c, d) {
 spinButton.addEventListener('click', rotateWheel);
 
 drawWheel();
+
