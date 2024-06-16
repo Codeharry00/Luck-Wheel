@@ -1,39 +1,40 @@
-// script.js
-
 const canvas = document.getElementById('wheel');
 const ctx = canvas.getContext('2d');
 const spinButton = document.getElementById('spinButton');
 
 const segments = [
-    '50% + Quà', '55% + Quà', '45% + Quà', 
-    '50% + Quà', 'Mất lượt', '35% + Quà',
-    '40% + Quà', 'Thêm lượt'
+    'Voucher 50% + Quà', 'Mất Lượt', 'Voucher 35% + Quà', 
+    'Voucher 55% + Quà', 'Thêm Lượt', 'Voucher 40% + Quà', 
+    'May Mắn'
 ];
 const segmentColors = [
-    '#3ACC85', '#FF0099', '#FF8A00', '#FF5500', 
-    '#CC5555', '#009DEE', '#304BCE', '#93D1BC'
+    '#FFEB3B', '#4CAF50', '#F44336', '#FF9800', 
+    '#03A9F4', '#E91E63', '#9C27B0'
 ];
 
-// **Thêm các hình ảnh cho từng mục phần thưởng**
-const images = [
-    'images/50_qua.png', 'images/55_qua.png', 'images/45_qua.png', 
-    'images/50_qua.png', 'images/mat_luot.png', 'images/35_qua.png',
-    'images/40_qua.png', 'images/them_luot.png'
+// Đường dẫn đến các hình ảnh
+const imagePaths = [
+    'images/Voucher.png', 'images/Sad.png', 'images/Voucher.png',
+    'images/Voucher.png', '', 'images/Voucher.png',
+    'images/Happy.png'
 ];
 
-const loadedImages = [];
+let loadedImages = [];
 
-let imagesLoaded = 0;
-for (let i = 0; i < images.length; i++) {
-    const img = new Image();
-    img.src = images[i];
-    img.onload = function() {
-        imagesLoaded++;
-        if (imagesLoaded === images.length) {
-            drawWheel(); // Chỉ vẽ bánh xe khi tất cả hình ảnh đã tải xong
-        }
-    };
-    loadedImages.push(img);
+// Hàm tải các hình ảnh
+function loadImages(callback) {
+    let loadedCount = 0;
+    for (let i = 0; i < imagePaths.length; i++) {
+        const img = new Image();
+        img.src = imagePaths[i];
+        img.onload = () => {
+            loadedCount++;
+            if (loadedCount === imagePaths.length) {
+                callback();
+            }
+        };
+        loadedImages.push(img);
+    }
 }
 
 let startAngle = 0;
@@ -53,13 +54,24 @@ function drawWheel() {
         ctx.fill();
 
         ctx.save();
+        ctx.fillStyle = 'black';
         ctx.translate(250 + Math.cos(angle + arc / 2) * 200, 250 + Math.sin(angle + arc / 2) * 200);
         ctx.rotate(angle + arc / 2 + Math.PI / 2);
+        ctx.font = 'bold 20px Calibri'; // Thay đổi kích thước và kiểu chữ
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = 'center';
+        const text = segments[i].split('\n'); // Tách cụm từ thành từng từ
 
-        // **Vẽ hình ảnh**
+        // Vẽ cụm từ theo chiều dọc
+        for (let j = 0; j < text.length; j++) {
+            ctx.fillText(text[j], 0, j * 22 - (text.length * 11)); // 22 là khoảng cách giữa các từ, điều chỉnh nếu cần
+        }
+
+        // Vẽ hình ảnh sau cụm từ
         const img = loadedImages[i];
-        ctx.drawImage(img, -50, -50, 100, 100); // Điều chỉnh kích thước hình ảnh nếu cần
-
+        const imgY = (text.length * 22) / 2 + 10; // Tính toán vị trí Y để đặt hình ảnh
+        ctx.drawImage(img, -img.width / 2, imgY);
+        
         ctx.restore();
     }
 }
@@ -98,5 +110,5 @@ function easeOut(t, b, c, d) {
 
 spinButton.addEventListener('click', rotateWheel);
 
-
-
+// Tải các hình ảnh và vẽ vòng quay sau khi tải xong
+loadImages(drawWheel);
