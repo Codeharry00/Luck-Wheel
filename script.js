@@ -116,3 +116,6 @@ spinButton.addEventListener('click', rotateWheel);
 
 // Tải các hình ảnh và vẽ vòng quay sau khi tải xong
 loadImages(drawWheel);
+
+// Tải các hình ảnh và vẽ vòng quay sau khi tải xong
+loadImages(drawWheel);
