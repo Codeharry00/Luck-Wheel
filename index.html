@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vòng Quay May Mắn</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        #wheel {
+            border: 5px solid #000;
+            border-radius: 50%;
+        }
+        #spinButton {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="wheel-container">
-        <canvas id="wheel" width="500" height="500"></canvas>
-        <button id="spinButton">Quay</button>
-    </div>
+    <canvas id="wheel" width="500" height="500"></canvas>
+    <button id="spinButton">Quay</button>
     <script src="script.js"></script>
 </body>
 </html>
