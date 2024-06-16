@@ -1,3 +1,5 @@
+// script.js
+
 const canvas = document.getElementById('wheel');
 const ctx = canvas.getContext('2d');
 const spinButton = document.getElementById('spinButton');
