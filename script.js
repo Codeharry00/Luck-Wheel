@@ -60,7 +60,7 @@ function drawWheel() {
         ctx.font = 'bold 20px Calibri'; // Thay đổi kích thước và kiểu chữ
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'center';
-        const text = segments[i].split('\n'); // Tách cụm từ thành từng từ
+        const text = segments[i].split(' '); // Tách cụm từ thành từng từ
 
         // Vẽ cụm từ theo chiều dọc
         for (let j = 0; j < text.length; j++) {
@@ -69,9 +69,11 @@ function drawWheel() {
 
         // Vẽ hình ảnh sau cụm từ
         const img = loadedImages[i];
-        const imgY = (text.length * 22) / 2 + 10; // Tính toán vị trí Y để đặt hình ảnh
-        ctx.drawImage(img, -img.width / 2, imgY);
-        
+        if (img.src) { // Kiểm tra nếu hình ảnh tồn tại
+            const imgY = (text.length * 22) / 2 + 10; // Tính toán vị trí Y để đặt hình ảnh
+            ctx.drawImage(img, -img.width / 2, imgY);
+        }
+
         ctx.restore();
     }
 }
